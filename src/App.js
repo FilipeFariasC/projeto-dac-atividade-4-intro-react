@@ -1,22 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import {UserModel} from "./components/UserModel";
+import {BraceletModel} from "./components/BraceletModel";
+
+import {useState} from 'react';
 
 function App() {
+  const [register, setRegister] = useState(false);
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit the file at <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React, It's Awesome, Man
-        </a>
+        
+        {
+          !register ?
+          <UserModel
+          registerUser={()=>setRegister(true)}
+          /> :
+          <BraceletModel
+          restartRegister={()=>setRegister(false)}
+          />
+        }
+
       </header>
     </div>
   );
