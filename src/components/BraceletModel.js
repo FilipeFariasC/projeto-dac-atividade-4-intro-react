@@ -40,7 +40,6 @@ export function BraceletModel(props) {
     });
 
     setBraceletCreated(true);
-    props.restartRegister();
   }
 
   return (
@@ -67,18 +66,11 @@ export function BraceletModel(props) {
         </div>
         <br />
         <button type="submit">Cadastrar Pulseira</button>
-        <button
-          type="submit"
-          onClick={() => {
-            props.goToUserPage();
-          }}
-        >
+        <button onClick={props.goToUserPage}>
           Ir para a tela de cadastro de usuários
         </button>
       </form>
-      {braceletCreated
-        ? setBraceletCreated(false) + braceletRegisterList()
-        : braceletRegisterList()}
+      {braceletCreated ? setBraceletCreated(false) : braceletRegisterList()}
     </div>
   );
 }

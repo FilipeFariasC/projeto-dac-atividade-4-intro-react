@@ -3,7 +3,7 @@ import { BraceletModel } from "./components/BraceletModel";
 
 import { useState } from "react";
 
-function App() {
+export default function App() {
   const [register, setRegister] = useState(false);
 
   return (
@@ -16,5 +16,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

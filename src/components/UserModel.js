@@ -54,6 +54,7 @@ export function UserModel(props) {
       email,
       password,
     });
+
     setUserCreated(true);
   }
 
@@ -102,14 +103,12 @@ export function UserModel(props) {
 
         <br />
         <button type="submit">Cadastrar Usuário</button>
-        <button type="submit" onClick={props.goToBraceletPage}>
+        <button onClick={props.goToBraceletPage}>
           Ir para a tela de cadastro de Pulseiras
         </button>
       </form>
 
-      {userCreated
-        ? setUserCreated(false) + userRegisterList()
-        : userRegisterList()}
+      {userCreated ? setUserCreated(false) : userRegisterList()}
     </div>
   );
 }
