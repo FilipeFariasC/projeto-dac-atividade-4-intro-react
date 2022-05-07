@@ -16,11 +16,12 @@ export function BraceletModel(props) {
   const [braceletName, setBraceletName] = useState("");
 
   return (
-    <>
+    <div className="form">
       <header>
         <h2 className="title">Cadastro de Pulseira</h2>
       </header>
       <form
+        className="braceletForm flex flex-col"
         onSubmit={(event) => {
           event.preventDefault();
           submitBracelet(
@@ -44,6 +45,6 @@ export function BraceletModel(props) {
         <br />
         <button type="submit">Cadastrar Pulseira</button>
       </form>
-    </>
+    </div>
   );
 }

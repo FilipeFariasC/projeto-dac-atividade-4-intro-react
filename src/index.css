@@ -1,26 +1,27 @@
 body {
-  margin: 1rem;
   background-color: #222;
-
-  color: #fff;
+  box-sizing: border-box;
+  padding: 1rem;
+  margin: 0;
 
   height: 100vh;
 
+  color: #fff;
+}
+#root,
+.App {
+  height: 100%;
+  width: 100%;
+}
+.App {
+  position: relative;
   display: flex;
 
   align-items: center;
   justify-content: center;
 }
-
 .form {
-  position: absolute;
-
-  top: 50%;
-  left: 50%;
-
-  transform: translate(-50%, -50%);
-
-  width: 25%;
+  width: 50%;
 
   margin: 0 auto;
 }
@@ -69,4 +70,38 @@ body {
 .error {
   border: 0.125rem solid #ff0000;
   border-radius: 0.25rem;
+}
+
+.userRegisterList {
+  position: fixed;
+
+  top: 2.5%;
+  right: 2.5%;
+
+  height: 95%;
+
+  width: -webkit-max-content;
+
+  width: -moz-max-content;
+
+  width: max-content;
+
+  overflow-y: scroll;
+  scrollbar-width: none;
+
+  display: none;
+}
+
+h4,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.userRegister + .userRegister {
+  margin-top: 1rem;
+}
+
+.show {
+  display: block;
 }

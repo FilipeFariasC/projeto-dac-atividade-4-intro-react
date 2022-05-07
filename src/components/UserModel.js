@@ -1,6 +1,26 @@
 import { useState } from "react";
 
-function submitUser(user, registerUser) {
+var userList = [];
+
+function userRow(user, index) {
+  return (
+    <div key={index} className="userRegister flex flex-col">
+      <h4>User {index}</h4>
+      <p>{user.name}</p>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+
+function userRegisterList() {
+  return (
+    <div className={"userRegisterList " + (userList.length > 0 ? "show" : "")}>
+      {userList.map((user, index) => userRow(user, index))}
+    </div>
+  );
+}
+
+function submitUser(user, registerUser, continueRegister, setUserCreated) {
   var entrou = false;
   if (user.name.length === 0) {
     document.getElementById("name").classList.add("error");
@@ -22,13 +42,22 @@ function submitUser(user, registerUser) {
   console.log(user.email);
   console.log(user.password);
 
-  registerUser();
+  userList.push(user);
+  setUserCreated(true);
+
+  if (!continueRegister) {
+    registerUser();
+  }
 }
 
 export function UserModel(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [continueRegister, setContinueRegister] = useState(true);
+
+  const [userCreated, setUserCreated] = useState(false);
 
   return (
     <div class="form">
@@ -45,7 +74,9 @@ export function UserModel(props) {
               email,
               password,
             },
-            props.registerUser
+            props.registerUser,
+            continueRegister,
+            setUserCreated
           );
         }}
       >
@@ -81,8 +112,17 @@ export function UserModel(props) {
         </div>
 
         <br />
-        <button type="submit">Cadastrar</button>
+        <button type="submit" onClick={() => setContinueRegister(true)}>
+          Cadastrar Usuário e continuar cadastrando
+        </button>
+        <button type="submit" onClick={() => setContinueRegister(false)}>
+          Cadastrar Usuário e seguir para pulseira
+        </button>
       </form>
+
+      {userCreated
+        ? setUserCreated(false) + userRegisterList()
+        : userRegisterList()}
     </div>
   );
 }
