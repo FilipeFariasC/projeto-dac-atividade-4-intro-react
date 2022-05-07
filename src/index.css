@@ -30,7 +30,7 @@ body {
   text-align: center;
 }
 
-.userForm {
+.form form {
   gap: 0.25rem;
 }
 
@@ -72,7 +72,7 @@ body {
   border-radius: 0.25rem;
 }
 
-.userRegisterList {
+.registerList {
   position: fixed;
 
   top: 2.5%;
@@ -98,7 +98,7 @@ p {
   padding: 0;
 }
 
-.userRegister + .userRegister {
+.register + .register {
   margin-top: 1rem;
 }
 

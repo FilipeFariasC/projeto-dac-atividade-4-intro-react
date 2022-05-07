@@ -4,7 +4,7 @@ var userList = [];
 
 function userRow(user, index) {
   return (
-    <div key={index} className="userRegister flex flex-col">
+    <div key={index} className="register flex flex-col">
       <h4>User {index}</h4>
       <p>{user.name}</p>
       <p>{user.email}</p>
@@ -14,7 +14,7 @@ function userRow(user, index) {
 
 function userRegisterList() {
   return (
-    <div className={"userRegisterList " + (userList.length > 0 ? "show" : "")}>
+    <div className={"registerList " + (userList.length > 0 ? "show" : "")}>
       {userList.map((user, index) => userRow(user, index))}
     </div>
   );
