@@ -9,9 +9,9 @@ function App() {
   return (
     <div className="App">
       {!register ? (
-        <UserModel registerUser={() => setRegister(true)} />
+        <UserModel goToBraceletPage={() => setRegister(true)} />
       ) : (
-        <BraceletModel restartRegister={() => setRegister(false)} />
+        <BraceletModel goToUserPage={() => setRegister(false)} />
       )}
     </div>
   );

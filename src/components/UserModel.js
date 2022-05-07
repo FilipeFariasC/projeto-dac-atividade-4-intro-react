@@ -20,44 +20,42 @@ function userRegisterList() {
   );
 }
 
-function submitUser(user, registerUser, continueRegister, setUserCreated) {
-  var entrou = false;
-  if (user.name.length === 0) {
-    document.getElementById("name").classList.add("error");
-    entrou = true;
-  }
-  if (user.email.length === 0) {
-    document.getElementById("email").classList.add("error");
-    entrou = true;
-  }
-  if (user.password.length === 0) {
-    document.getElementById("password").classList.add("error");
-    entrou = true;
-  }
-  if (entrou) {
-    return;
-  }
-
-  console.log(user.name);
-  console.log(user.email);
-  console.log(user.password);
-
-  userList.push(user);
-  setUserCreated(true);
-
-  if (!continueRegister) {
-    registerUser();
-  }
-}
-
 export function UserModel(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [continueRegister, setContinueRegister] = useState(true);
-
   const [userCreated, setUserCreated] = useState(false);
+
+  function submitUser() {
+    var entrou = false;
+    if (name.length === 0) {
+      document.getElementById("name").classList.add("error");
+      entrou = true;
+    }
+    if (email.length === 0) {
+      document.getElementById("email").classList.add("error");
+      entrou = true;
+    }
+    if (password.length === 0) {
+      document.getElementById("password").classList.add("error");
+      entrou = true;
+    }
+    if (entrou) {
+      return;
+    }
+
+    console.log(name);
+    console.log(email);
+    console.log(password);
+
+    userList.push({
+      name,
+      email,
+      password,
+    });
+    setUserCreated(true);
+  }
 
   return (
     <div class="form">
@@ -68,16 +66,7 @@ export function UserModel(props) {
         className="userForm flex flex-col"
         onSubmit={(event) => {
           event.preventDefault();
-          submitUser(
-            {
-              name,
-              email,
-              password,
-            },
-            props.registerUser,
-            continueRegister,
-            setUserCreated
-          );
+          submitUser();
         }}
       >
         <div className="model-wrapper flex">
@@ -112,11 +101,9 @@ export function UserModel(props) {
         </div>
 
         <br />
-        <button type="submit" onClick={() => setContinueRegister(true)}>
-          Cadastrar Usuário e continuar cadastrando
-        </button>
-        <button type="submit" onClick={() => setContinueRegister(false)}>
-          Cadastrar Usuário e seguir para pulseira
+        <button type="submit">Cadastrar Usuário</button>
+        <button type="submit" onClick={props.goToBraceletPage}>
+          Ir para a tela de cadastro de Pulseiras
         </button>
       </form>
 

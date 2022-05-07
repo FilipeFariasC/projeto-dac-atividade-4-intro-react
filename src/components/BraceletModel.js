@@ -19,36 +19,29 @@ function braceletRegisterList() {
   );
 }
 
-function submitBracelet(
-  bracelet,
-  setBraceletCreated,
-  continueRegister,
-  restartRegister
-) {
-  var entrou = false;
-  if (bracelet.name.length === 0) {
-    document.getElementById("braceletName").classList.add("error");
-    entrou = true;
-  }
-  if (entrou) {
-    return;
-  }
-  console.log(bracelet.name);
-
-  braceletList.push(bracelet);
-
-  setBraceletCreated(true);
-  if (!continueRegister) {
-    restartRegister();
-  }
-}
-
 export function BraceletModel(props) {
   const [braceletName, setBraceletName] = useState("");
 
   const [braceletCreated, setBraceletCreated] = useState(false);
 
-  const [continueRegister, setContinueRegister] = useState(true);
+  function submitBracelet() {
+    var entrou = false;
+    if (braceletName.length === 0) {
+      document.getElementById("braceletName").classList.add("error");
+      entrou = true;
+    }
+    if (entrou) {
+      return;
+    }
+    console.log(braceletName);
+
+    braceletList.push({
+      name: braceletName,
+    });
+
+    setBraceletCreated(true);
+    props.restartRegister();
+  }
 
   return (
     <div className="form">
@@ -59,14 +52,7 @@ export function BraceletModel(props) {
         className="braceletForm flex flex-col"
         onSubmit={(event) => {
           event.preventDefault();
-          submitBracelet(
-            {
-              name: braceletName,
-            },
-            setBraceletCreated,
-            continueRegister,
-            props.restartRegister
-          );
+          submitBracelet();
         }}
       >
         <div className="model-wrapper flex">
@@ -80,21 +66,14 @@ export function BraceletModel(props) {
           />
         </div>
         <br />
+        <button type="submit">Cadastrar Pulseira</button>
         <button
           type="submit"
           onClick={() => {
-            setContinueRegister(true);
+            props.goToUserPage();
           }}
         >
-          Cadastrar Pulseira e continuar cadastros
-        </button>
-        <button
-          type="submit"
-          onClick={() => {
-            setContinueRegister(false);
-          }}
-        >
-          Cadastrar Pulseira e retornar para o cadastro de usuários
+          Ir para a tela de cadastro de usuários
         </button>
       </form>
       {braceletCreated
